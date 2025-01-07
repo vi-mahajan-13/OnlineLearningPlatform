@@ -1,0 +1,6 @@
+<h1>This is cources listing page</h1>
+
+<% @courses.each do |course| %>  
+    <h2><%= course.title %></h2>  
+    <p><%= course.description %></p>  
+<% end %>

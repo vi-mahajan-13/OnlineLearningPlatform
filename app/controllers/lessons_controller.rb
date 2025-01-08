@@ -1,4 +1,6 @@
 class LessonsController < ApplicationController
+  before_action :authenticate_user!
+  load_and_authorize_resource
   def index
     @course = Course.find(params[:course_id])
     @lessons = @course.lessons.all
@@ -13,6 +15,8 @@ class LessonsController < ApplicationController
   def new
     @course = Course.find(params[:course_id])   
     @lesson = @course.lessons.new    
+    authorize! :create, @lesson
+    render :new
   end
 
   def create

@@ -6,12 +6,14 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.instructor?
-      can :manage, :all
+      can :manage, Course
+      can :manage, Lesson
     elsif user.student?
-      can :read, :course
-      can :read, :lesson
+      can :read, Course
+      can :read, Lesson, course: { enrolled_students: { id: user.id } }
+      cannot :read, Lesson, course: { enrolled_students: { id: nil } }
     else
-      can :read, :course
+      can :read, Course
     end
   end
 end

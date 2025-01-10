@@ -20,7 +20,10 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
-
+  <div class="field">
+    <%= f.label :role %><br />
+    <%= f.select :role, options_for_select([['Student', 'student'], ['Instructor', 'instructor'], ['Admin', 'admin']], resource.role), include_blank: false %>
+  </div>
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

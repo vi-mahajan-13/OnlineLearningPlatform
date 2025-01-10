@@ -1,6 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!
-  load_and_authorize_resource
+  load_and_authorize_resource :course
+  load_and_authorize_resource :lesson, through: :course
   def index
     @course = Course.find(params[:course_id])
     @lessons = @course.lessons.all
@@ -10,6 +11,8 @@ class LessonsController < ApplicationController
   def show
     @course = Course.find(params[:course_id])
     @lesson = @course.lessons.find(params[:id])
+    @next_lesson = @lesson.course.lessons.where('created_at > ?', @lesson.created_at).first
+    @previous_lesson = @lesson.course.lessons.where('created_at < ?', @lesson.created_at).last
   end
 
   def new

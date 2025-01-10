@@ -2,6 +2,9 @@
 
 
 <% @lessons.each do |lesson| %>  
+
     <h2><%= lesson.title %></h2>  
     <p><%= lesson.content %></p> 
+
+    <%= link_to 'View', course_lesson_path(id: lesson.id) %> 
 <% end %>

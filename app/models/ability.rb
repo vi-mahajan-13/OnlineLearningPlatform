@@ -12,8 +12,6 @@ class Ability
       can :read, Course
       can :read, Lesson, course: { enrolled_students: { id: user.id } }
       cannot :read, Lesson, course: { enrolled_students: { id: nil } }
-    else
-      can :read, Course
     end
   end
 end

@@ -1,10 +1,7 @@
 <h1>This is lesson show page of a particular course based on id</h1>
 
-
 <h1><%= @lesson.title %></h1>
-
 <p><%= @lesson.content %></p>
-
 
 <% @completed_lesson = CompletedLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id) %>
 

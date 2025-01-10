@@ -4,10 +4,9 @@
   <% if course.user_id == current_user.id || current_user.student? || current_user.admin? %>
     <h2><%= course.title %></h2>  
     <p><%= course.description %></p>
-     <%= link_to 'View', course_path(course.id) %> 
+    <%= link_to 'View', course_path(course.id) %> 
   <% end %>  
- 
-<% end %>
-<br>
+<% end %><br>
 
-<%= link_to 'Create Course', new_course_path %>
+<%= link_to 'Create Course', new_course_path if current_user.instructor? %><br>
+<%= link_to 'Back to home', root_path %>

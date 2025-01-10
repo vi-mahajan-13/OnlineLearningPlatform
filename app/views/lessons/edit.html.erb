@@ -1,5 +1,7 @@
 <h1>Edit Lesson</h1>
+
 <%= form_with model: @lesson , url: course_lesson_path(@course, @lesson) do |form| %>
+
     <div class="form-group">
       <%= form.label :title %><br>
       <%= form.text_field :title %>

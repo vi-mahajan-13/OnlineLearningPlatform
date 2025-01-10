@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-    # your action code here
+    @user = current_user
   end
 end
-

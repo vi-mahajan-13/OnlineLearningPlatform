@@ -2,9 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-   enum role: { student: 'student', instructor: 'instructor', admin: 'admin' }
+  enum role: { student: 'student', instructor: 'instructor', admin: 'admin' }
    
-
   has_many :courses, dependent: :destroy
   has_many :enrollments, dependent: :destroy
   has_many :enrolled_courses, through: :enrollments, source: :course

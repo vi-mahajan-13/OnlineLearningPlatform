@@ -1,6 +1,7 @@
 <h1>Edit Course</h1>
 
 <%= form_with model: @course do |form| %>
+
     <div>
       <%= form.label :title %><br>
       <%= form.text_field :title %>
@@ -11,9 +12,8 @@
       <%= form.text_area :description %><br>
     </div>
 
-  
     <div>
       <%= form.submit %>
     </div>
-  <% end %>
+<% end %>
   

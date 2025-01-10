@@ -4,9 +4,9 @@
 
 <p><%= @course.description %></p>
 
-<% if current_user.enrolled_courses.include?(@course) %>
-  <%= link_to 'View Lessons', course_lessons_path(@course) %>
-  <%= link_to 'UnEnroll', course_enrollment_path(@course.id), data: { turbo_method: :delete } %>
+<% if current_user.enrolled_courses.include?(@course) || current_user.courses.include?(@course) %>
+  <%= link_to 'View Lessons', course_lessons_path(@course) %><br>
+  <%= link_to 'UnEnroll', course_enrollment_path(@course.id), data: { turbo_method: :delete } if current_user.student? %><br>
 <% else %>
   <%= link_to 'Enroll', course_enrollments_path(@course.id),  data: { turbo_method: :post } %><br>
 <% end %>
@@ -14,6 +14,5 @@
 <% if current_user.instructor? %>
   <%= link_to "Add lessons", new_course_lesson_path(course_id: @course.id) %>
 <% end %>
-
-
-
+<br>
+<%= link_to "Back to courses", courses_path %>

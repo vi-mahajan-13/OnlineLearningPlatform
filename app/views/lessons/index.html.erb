@@ -1,0 +1,10 @@
+<h1>This is lessons listing page of a particular course based on id</h1>
+
+
+<% @lessons.each do |lesson| %>  
+
+    <h2><%= lesson.title %></h2>  
+    <p><%= lesson.content %></p> 
+
+    <%= link_to 'View', course_lesson_path(id: lesson.id) %> 
+<% end %>

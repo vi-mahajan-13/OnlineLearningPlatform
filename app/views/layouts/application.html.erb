@@ -2,17 +2,38 @@
 <html>
   <head>
     <title>OnlineLearningPlatform</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- Custom styles for the navbar -->
+    <style>
+      .navbar {
+        background-color: white !important;  /* Set background to white */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);  /* Add a thin grey line with low opacity */
+      }
+    </style>
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p> 
-    <p class="alert"><%= alert %></p> 
+    <!-- Navbar with updated styling -->
+    <nav class="navbar">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" alt="Udemy Logo" width="91" height="34">
+        </a>
+      </div>
+    </nav>
+
+    <!-- Flash messages for notifications -->
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
+    <!-- Main content -->
     <%= yield %>
+
   </body>
 </html>

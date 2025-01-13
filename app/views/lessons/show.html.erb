@@ -3,13 +3,15 @@
 <h1><%= @lesson.title %></h1>
 <p><%= @lesson.content %></p>
 
-<% @completed_lesson = CompletedLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id) %>
-
-<% if @completed_lesson %>
-  <%= link_to 'InComplete', course_lesson_completed_lesson_path(lesson_id: @lesson.id), data: { turbo_method: :delete } %><br>
-<% else %>
-  <%= link_to 'Complete', course_lesson_completed_lessons_path(lesson_id: @lesson.id), data: { turbo_method: :post } %><br>
+<% if current_user.student? %>
+  <% @completed_lesson = CompletedLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id) %>
+  <% if @completed_lesson %>
+    <%= link_to 'InComplete', course_lesson_completed_lesson_path(lesson_id: @lesson.id), data: { turbo_method: :delete } %><br>
+  <% else %>
+    <%= link_to 'Complete', course_lesson_completed_lessons_path(lesson_id: @lesson.id), data: { turbo_method: :post } %><br>
+  <% end %>
 <% end %>
 
 <%= link_to 'Next Lesson', course_lesson_path(id: @next_lesson.id) if @next_lesson %>
-<%= link_to 'Previous Lesson', course_lesson_path(id: @previous_lesson.id) if @previous_lesson %>
+<%= link_to 'Previous Lesson', course_lesson_path(id: @previous_lesson.id) if @previous_lesson %><br>
+<%= link_to "Back to lessons", course_lessons_path %>

@@ -1,9 +1,9 @@
 <% if user_signed_in? %> 
   <%= button_to "Sign out", destroy_user_session_path, method: :delete %>  
-  <% if current_user.instructor? %>
+  <% if current_user.instructor? || current_user.admin? %>
     <%= link_to 'Create Course', new_course_path %> <br>
     <%= link_to 'My Courses', courses_path %>
-  <% elsif current_user.student? %>
+  <% elsif current_user.student? || current_user.admin? %>
     <%= link_to 'My Learning', courses_path(clicked_my_learning: 'my_learning') %><br>
     <%= link_to 'Courses', courses_path  %>
   <% end %>

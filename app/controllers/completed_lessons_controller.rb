@@ -12,7 +12,7 @@ class CompletedLessonsController < ApplicationController
       render 'lessons/show', alert: 'There was an issue with your completion'
     end
   end
-  
+
   def destroy
     if @completed_lesson
       @completed_lesson.destroy

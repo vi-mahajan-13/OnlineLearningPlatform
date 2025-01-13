@@ -12,14 +12,7 @@
 <% end %>
 
 <% if current_user.instructor? %>
-  <%= link_to 'Add lessons', new_course_lesson_path(course_id: @course.id) %>
+  <%= link_to "Add lessons", new_course_lesson_path(course_id: @course.id) %>
 <% end %>
 <br>
-<% if current_user.student? %>
-  <%= link_to 'All courses', courses_path%><br>
-  <%= link_to 'My learning', courses_path(clicked_my_learning: 'my_learning') %><br>
-<% end %>
-
-<% if current_user.instructor? %>
-  <%= link_to 'Back to my courses', courses_path%><br>
-<% end %>
+<%= link_to "Back to courses", courses_path %>

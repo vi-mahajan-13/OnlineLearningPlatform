@@ -2,11 +2,12 @@ class LessonsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_course
   before_action :set_lesson, only: [:show, :edit, :update]
+
   load_and_authorize_resource :course
   load_and_authorize_resource :lesson, through: :course
 
   def index
-    @lessons = @course.lessons
+    @lessons = @course.lessons.all
   end   
 
   def show

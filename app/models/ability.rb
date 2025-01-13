@@ -6,10 +6,8 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.instructor?
-      can :manage, Course, user_id: user.id
-      can :manage, Lesson, course: { user_id: user.id }
-      can :read, Course, user_id: user.id
-      can :read, Lesson, course: { user_id: user.id }
+      can :manage, Course
+      can :manage, Lesson
     elsif user.student?
       can :read, Course
       can :read, Lesson, course: { enrolled_students: { id: user.id } }

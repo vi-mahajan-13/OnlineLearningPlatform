@@ -7,7 +7,7 @@ class LessonsController < ApplicationController
   load_and_authorize_resource :lesson, through: :course
 
   def index
-    @lessons = @course.lessons.all
+    @lessons = @course.lessons
   end   
 
   def show

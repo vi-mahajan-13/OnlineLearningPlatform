@@ -4,6 +4,26 @@
 
 <p><%= @course.description %></p>
 
+<% if current_user.enrolled_courses.include?(@course) && current_user.student? %>
+  <% completed_lessons_count = 0 %>
+  <% total_lessons_count = @course.lessons.count %>
+
+  <% @course.lessons.each do |lesson| %>
+    <% if CompletedLesson.exists?(user_id: current_user.id, lesson_id: lesson.id, completed: true) %>
+      <% completed_lessons_count +=1 %>
+    <% end %>
+  <% end %>  
+
+  <% if completed_lessons_count == total_lessons_count %>
+    <h1>This course is completed</h1>
+  <% elsif completed_lessons_count == 0 %>
+    <h1>This course is not started yet</h1>
+  <% else @complted < @total_lessons %>
+    <h1>This course is in progress</h1>
+  <% end %>  
+  <h1><%= completed_lessons_count %> out of <%= total_lessons_count %> lessons completed</h1>
+<% end %>
+
 <% if current_user.enrolled_courses.include?(@course) || current_user.courses.include?(@course) %>
   <%= link_to 'View Lessons', course_lessons_path(@course) %><br>
   <%= link_to 'UnEnroll', course_enrollment_path(@course.id), data: { turbo_method: :delete } if current_user.student? %><br>
@@ -23,4 +43,3 @@
 <% if current_user.instructor? %>
   <%= link_to 'Back to my courses', courses_path%><br>
 <% end %>
-

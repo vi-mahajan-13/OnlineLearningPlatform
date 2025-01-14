@@ -9,7 +9,6 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
-    <!-- Custom styles for the navbar -->
     <style>
       .navbar {
         background-color: white !important;  /* Set background to white */
@@ -17,9 +16,7 @@
       }
     </style>
   </head>
-
   <body>
-    <!-- Navbar with updated styling -->
     <nav class="navbar">
       <div class="container">
         <a class="navbar-brand" href="#">
@@ -27,13 +24,8 @@
         </a>
       </div>
     </nav>
-
-    <!-- Flash messages for notifications -->
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
-    <!-- Main content -->
     <%= yield %>
-
   </body>
 </html>

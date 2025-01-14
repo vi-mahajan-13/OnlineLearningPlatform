@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="<%= root_path %>">
+      <img src="https://www.udemy.com/staticx/udemy/images/v7/logo-udemy.svg" width="91" height="34" alt="Udemy Logo">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/categories">Categories</a>
+        </li> 
+        <li class="nav-item">
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+          </form>
+        </li>
+        <% if current_user && current_user.student? %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= courses_path %>">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= courses_path(clicked_my_learning: 'my_learning') %>">My learning</a>
+          </li>
+        <% elsif current_user && current_user.instructor? %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= courses_path(clicked_my_courses: 'my_courses')%>">My courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= new_course_path %>">Create courses</a>
+          </li>
+        <% elsif current_user && current_user.admin? %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= courses_path %>">Courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= courses_path(clicked_my_learning: 'my_learning') %>">My learning</a>
+          </li>    
+          <li class="nav-item">
+             <a class="nav-link" href="<%= courses_path(clicked_my_courses: 'my_courses')%>">My courses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= new_course_path %>">Create courses</a>
+          </li>                        
+        <% end %>
+
+      <% if user_signed_in? %>
+          <li class="nav-item">
+          <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+          </li>
+      <% else %>
+          <li class="nav-item">
+          <a class="nav-link" href="<%= new_user_session_path %>">Sing In</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
+          </li>
+      <% end %>  
+      </ul>
+    </div>
+  </div>
+</nav>

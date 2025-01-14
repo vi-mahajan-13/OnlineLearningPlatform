@@ -1,39 +1,47 @@
-<h2>Sign up</h2>
+<%= stylesheet_link_tag 'signup', media: 'all' %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="container d-flex justify-content-center">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= bootstrap_devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <label>Sign Up as</label><br />
-    <% ['student', 'instructor', 'admin'].each do |role| %>
-      <div class="form-check form-check-inline">
-        <%= f.radio_button :role, role, id: "role_#{role}", checked: (resource.role == role), class: 'form-check-input' %>
-        <%= f.label "role_#{role}", role.capitalize, class: 'form-check-label' %>
+    <div class="signup__card p-4 shadow-sm" style="max-width: 450px; width: 100%;">
+      <h3 class="text-center mb-5"><%= t('.sign_up') %></h3>
+      
+      <div class="signup__form-group">
+        <%= f.label :email, class: 'form-label' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control form-control-lg' %>
       </div>
-    <% end %>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+      <div class="signup__form-group">
+        <%= f.label :password, class: 'form-label' %>
+        <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control form-control-lg' %>
+        <% if @minimum_password_length %>
+          <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
+        <% end %>
+      </div>
+
+      <div class="signup__form-group">
+        <%= f.label :password_confirmation, class: 'form-label' %>
+        <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control form-control-lg' %>
+      </div>
+
+      <div class="signup__form-group">
+        <%= f.label :role, t('.sign_up_as'), class: 'form-label' %><br />
+        <% ['student', 'instructor', 'admin'].each do |role| %>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :role, role, id: "role_#{role}", checked: (resource.role == role), class: 'form-check-input' %>
+            <%= f.label "role_#{role}", role.capitalize, class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="signup__form-group text-center">
+        <%= f.submit t('.sign_up'), class: 'btn btn-primary btn-lg w-100' %>
+      </div>
+    </div>
+  <% end %>
+</div> 
+
+<div class="container text-center">
+  <%= render 'devise/shared/links' %>
+</div>

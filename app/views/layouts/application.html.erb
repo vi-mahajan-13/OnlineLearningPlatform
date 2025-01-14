@@ -8,11 +8,17 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ08vYzv8cR+K6z5l0MQ5C6ph/E+0Zlf3cI5xR3UwmYo5FfwA6v9ayHqGTR6" crossorigin="anonymous">
   </head>
   <body>
     <%= render 'layouts/navbar'%>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
     <%= yield %>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-QJ5v57+F25Zm5GTr9nXT6t5Jz7D9FrZnld8MZhf6h0Fi6Z5A9GnF37rtuDZJxxD7" crossorigin="anonymous"></script>
   </body>
 </html>

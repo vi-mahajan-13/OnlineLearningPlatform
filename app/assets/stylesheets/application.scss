@@ -15,26 +15,4 @@
  */
 
  @import "bootstrap";
- 
-
- /* Custom styles for the navbar */
-  .navbar {
-    background-color: white !important;  /* Set background to white */
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);  /* Add a thin grey line with low opacity */
-    padding: 0.5rem 1rem;
-  }
-  
-  .navbar-brand img {
-    height: 40px;
-  }
-  
-  .navbar-nav .nav-link {
-    font-size: 1.1rem;
-  }
-  
-  .navbar-nav .btn-primary {
-    background-color: #0070f0; /* Udemy button orange color */
-    border-color: #f06c00;
-    margin-right: 0.7rem;
-  }
-  
+ @import 'navbar';

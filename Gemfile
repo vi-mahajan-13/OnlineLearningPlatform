@@ -73,3 +73,7 @@ gem 'cancancan'
 gem "bootstrap"
 
 gem "sassc-rails"
+
+gem 'devise-bootstrap-views', '~> 1.0'
+
+gem 'devise-i18n'

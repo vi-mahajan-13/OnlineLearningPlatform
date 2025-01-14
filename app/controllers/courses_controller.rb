@@ -5,11 +5,20 @@ class CoursesController < ApplicationController
 
   def index
     @clicked_my_learning = params[:clicked_my_learning]
-
-    if @clicked_my_learning
-      @courses = current_user.enrolled_courses
-    else
-      @courses = current_user.instructor? || current_user.admin? ? current_user.courses : Course.all
+    @clicked_my_courses = params[:clicked_my_courses]
+    
+    if current_user.student?
+      @courses = @clicked_my_learning ? current_user.enrolled_courses : Course.all
+    elsif current_user.instructor?
+      @courses = current_user.courses if @clicked_my_courses
+    elsif current_user.admin?
+      if @clicked_my_courses
+        @courses = current_user.courses
+      elsif @clicked_my_learning
+        @courses = current_user.enrolled_courses
+      else
+        @courses = Course.all
+      end
     end
   end
 

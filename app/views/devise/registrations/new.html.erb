@@ -22,8 +22,13 @@
   </div>
 
   <div class="field">
-    <%= f.label :role %><br />
-    <%= f.select :role, options_for_select([['Student', 'student'], ['Instructor', 'instructor'], ['Admin', 'admin']], resource.role), include_blank: false %>
+    <label>Sign Up as</label><br />
+    <% ['student', 'instructor', 'admin'].each do |role| %>
+      <div class="form-check form-check-inline">
+        <%= f.radio_button :role, role, id: "role_#{role}", checked: (resource.role == role), class: 'form-check-input' %>
+        <%= f.label "role_#{role}", role.capitalize, class: 'form-check-label' %>
+      </div>
+    <% end %>
   </div>
   
   <div class="actions">

@@ -18,7 +18,7 @@
     <h1>This course is completed</h1>
   <% elsif completed_lessons_count == 0 %>
     <h1>This course is not started yet</h1>
-  <% else @complted < @total_lessons %>
+  <% else %>
     <h1>This course is in progress</h1>
   <% end %>  
   <h1><%= completed_lessons_count %> out of <%= total_lessons_count %> lessons completed</h1>

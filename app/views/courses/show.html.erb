@@ -1,45 +1,108 @@
-<h1>This is course show page</h1>
+<h1 class="text-center my-5 text-primary">Course: <%= @course.title %></h1>
 
-<h1><%= @course.title %></h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 mb-4">
+      <div class="card shadow-lg border-0 rounded-3 hover-scale">
+        <div class="card-body text-center">
+          <h5 class="card-title text-dark fw-bold mb-3"><%= @course.title %></h5>
+          <p class="card-text text-muted"><%= @course.description %></p>
 
-<p><%= @course.description %></p>
+          <% if current_user.enrolled_courses.include?(@course) && current_user.student? %>
+            <% completed_lessons_count = 0 %>
+            <% total_lessons_count = @course.lessons.count %>
 
-<% if current_user.enrolled_courses.include?(@course) && current_user.student? %>
-  <% completed_lessons_count = 0 %>
-  <% total_lessons_count = @course.lessons.count %>
+            <% @course.lessons.each do |lesson| %>
+              <% if CompletedLesson.exists?(user_id: current_user.id, lesson_id: lesson.id, completed: true) %>
+                <% completed_lessons_count += 1 %>
+              <% end %>
+            <% end %>  
 
-  <% @course.lessons.each do |lesson| %>
-    <% if CompletedLesson.exists?(user_id: current_user.id, lesson_id: lesson.id, completed: true) %>
-      <% completed_lessons_count +=1 %>
-    <% end %>
-  <% end %>  
+            <h5 class="mt-4">
+              <% if completed_lessons_count == total_lessons_count %>
+                This course is completed
+              <% elsif completed_lessons_count == 0 %>
+                This course is not started yet
+              <% else %>
+                This course is in progress
+              <% end %>
+            </h5>
+            <h5><%= completed_lessons_count %> out of <%= total_lessons_count %> lessons completed</h5>
+          <% end %>
 
-  <% if completed_lessons_count == total_lessons_count %>
-    <h1>This course is completed</h1>
-  <% elsif completed_lessons_count == 0 %>
-    <h1>This course is not started yet</h1>
-  <% else %>
-    <h1>This course is in progress</h1>
-  <% end %>  
-  <h1><%= completed_lessons_count %> out of <%= total_lessons_count %> lessons completed</h1>
-<% end %>
+          <div class="mt-4">
+            <% if current_user.enrolled_courses.include?(@course) || current_user.courses.include?(@course) %>
+              <%= link_to 'View Lessons', course_lessons_path(@course), class: 'btn btn-primary btn-sm rounded-pill' %><br>
+              <%= link_to 'UnEnroll', course_enrollment_path(@course.id), data: { turbo_method: :delete }, class: 'btn btn-danger btn-sm rounded-pill mt-3' if current_user.student? %><br>
+            <% else %>
+              <%= link_to 'Enroll', course_enrollments_path(@course.id), data: { turbo_method: :post }, class: 'btn btn-primary btn-sm rounded-pill mt-3' %><br>
+            <% end %>
 
-<% if current_user.enrolled_courses.include?(@course) || current_user.courses.include?(@course) %>
-  <%= link_to 'View Lessons', course_lessons_path(@course) %><br>
-  <%= link_to 'UnEnroll', course_enrollment_path(@course.id), data: { turbo_method: :delete } if current_user.student? %><br>
-<% else %>
-  <%= link_to 'Enroll', course_enrollments_path(@course.id),  data: { turbo_method: :post } %><br>
-<% end %>
+            <% if current_user.instructor? %>
+              <%= link_to 'Add lessons', new_course_lesson_path(course_id: @course.id), class: 'btn btn-success btn-lg rounded-pill mt-3' %><br>
+            <% end %>
+          </div>
 
-<% if current_user.instructor? %>
-  <%= link_to 'Add lessons', new_course_lesson_path(course_id: @course.id) %>
-<% end %>
-<br>
-<% if current_user.student? %>
-  <%= link_to 'All courses', courses_path%><br>
-  <%= link_to 'My learning', courses_path(clicked_my_learning: 'my_learning') %><br>
-<% end %>
+          <!-- Navigation Links -->
+          <div class="text-center mt-4">
+            <% if current_user.student? %>
+              <%= link_to 'All courses', courses_path, class: 'btn btn-light btn-lg rounded-pill px-4' %><br>
+              <%= link_to 'My learning', courses_path(clicked_my_learning: 'my_learning'), class: 'btn btn-light btn-lg rounded-pill px-4' %><br>
+            <% end %>
 
-<% if current_user.instructor? %>
-  <%= link_to 'Back to my courses', courses_path%><br>
-<% end %>
+            <% if current_user.instructor? %>
+              <%= link_to 'Back to my courses', courses_path, class: 'btn btn-light btn-lg rounded-pill px-4' %><br>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hover-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-lg {
+    font-size: 1.2rem;
+    padding: 12px 25px;
+  }
+
+  .btn-sm {
+    font-size: 0.875rem;
+    padding: 6px 15px;
+  }
+
+  .btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+
+  .btn-light {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+</style>

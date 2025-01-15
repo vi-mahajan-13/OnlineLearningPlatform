@@ -1,11 +1,56 @@
-<h1>This is category listing page</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <% @categories.each do |category| %>  
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg border-0 rounded-3 hover-scale">
+          <div class="card-body text-center">
+            <h5 class="card-title text-dark fw-bold mb-3">
+              <%= link_to category.name, category_courses_path(category), class: 'text-decoration-none text-dark' %>
+            </h5>
+            <p class="card-text text-muted">
+              Explore courses and resources in this category.
+            </p>
+            <div class="badge bg-primary rounded-pill p-2">
+              <%= category.courses.count %> Courses
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<ul>
-<% @categories.each do |category| %>  
-  <li><%= link_to category.name, category_courses_path(category) %></li>  
-<% end %><br>
-</ul>
+  <!-- Action Buttons -->
+  <div class="text-center mt-4">
+    <% if current_user.instructor? || current_user.admin? %>
+      <%= link_to 'Create your own category', new_category_path, class: 'btn btn-success btn-lg rounded-pill px-4 mb-3' %><br>
+      <%= link_to 'Create course', new_course_path, class: 'btn btn-warning btn-lg rounded-pill px-4 mb-3' %><br>
+    <% end %>
+    <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4' %>
+  </div>
+</div>
 
-<%= link_to 'Create your own category', new_category_path if current_user.instructor? || current_user.admin? %><br>
-<%= link_to 'Create course', new_course_path if current_user.instructor? || current_user.admin? %><br>
-<%= link_to 'Back to home', root_path %>
+<style>
+  .hover-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-primary, .btn-success, .btn-warning {
+    font-size: 1.1rem;
+    padding: 12px 25px;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+
+  .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+</style>

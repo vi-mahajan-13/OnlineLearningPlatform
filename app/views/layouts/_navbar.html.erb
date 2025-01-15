@@ -28,6 +28,9 @@
           </li>
         <% elsif current_user && current_user.instructor? %>
           <li class="nav-item">
+            <a class="nav-link" href="<%= courses_path %>">Courses</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="<%= courses_path(clicked_my_courses: 'my_courses')%>">My courses</a>
           </li>
           <li class="nav-item">
@@ -63,4 +66,11 @@
       </ul>
     </div>
   </div>
+</nav>
+
+<nav class="navbar bg-body-tertiary">
+  <form class="container-fluid justify-content-start">
+    <button class="btn btn-outline-success me-2" type="button">Main button</button>
+    <button class="btn btn-sm btn-outline-secondary" type="button">Smaller button</button>
+  </form>
 </nav>

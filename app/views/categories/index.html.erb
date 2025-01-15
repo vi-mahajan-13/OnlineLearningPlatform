@@ -1,0 +1,11 @@
+<h1>This is category listing page</h1>
+
+<ul>
+<% @categories.each do |category| %>  
+  <li><%= link_to category.name, category_courses_path(category) %></li>  
+<% end %><br>
+</ul>
+
+<%= link_to 'Create your own category', new_category_path if current_user.instructor? || current_user.admin? %><br>
+<%= link_to 'Create course', new_course_path if current_user.instructor? || current_user.admin? %><br>
+<%= link_to 'Back to home', root_path %>

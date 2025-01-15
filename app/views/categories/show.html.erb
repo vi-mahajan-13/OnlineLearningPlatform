@@ -1,0 +1,8 @@
+<h1><%= @category.name %></h1><br>
+
+<ul>
+  <% @courses.each do |course| %>  
+    <li><%= course.title %></li>  
+    <%= link_to 'View', course_path(course.id) %><br>
+  <% end %>
+</ul> 

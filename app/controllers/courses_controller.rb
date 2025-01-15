@@ -7,10 +7,13 @@ class CoursesController < ApplicationController
     @clicked_my_learning = params[:clicked_my_learning]
     @clicked_my_courses = params[:clicked_my_courses]
     
-    if current_user.student?
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      @courses = @category.courses
+    elsif current_user.student?
       @courses = @clicked_my_learning ? current_user.enrolled_courses : Course.all
     elsif current_user.instructor?
-      @courses = current_user.courses if @clicked_my_courses
+      @courses = @clicked_my_courses ? current_user.courses : Course.all
     elsif current_user.admin?
       if @clicked_my_courses
         @courses = current_user.courses
@@ -33,8 +36,8 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-
-    if @course.save
+   
+    if @course.save!
       redirect_to @course, notice: 'Course was successfully created.'
     else
       render :new, status: :unprocessable_entity
@@ -60,6 +63,6 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:title, :description, :user_id)
+    params.require(:course).permit(:title, :description, :user_id, :category_id)
   end
 end

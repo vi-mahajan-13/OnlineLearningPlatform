@@ -1,12 +1,20 @@
 <%= stylesheet_link_tag 'signup', media: 'all' %>
 
-<div class="container d-flex justify-content-center">
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= bootstrap_devise_error_messages! %>
+<div class="container d-flex flex-column justify-content-center align-items-center">
+  <% if resource.errors.any? %>
+    <div class="alert alert-danger mb-4" style="max-width: 450px; width: 100%;">
+      <ul>
+        <% resource.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <div class="signup__card p-4 shadow-sm" style="max-width: 450px; width: 100%;">
       <h3 class="text-center mb-5"><%= t('.sign_up') %></h3>
-      
+
       <div class="signup__form-group">
         <%= f.label :email, class: 'form-label' %>
         <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control form-control-lg' %>

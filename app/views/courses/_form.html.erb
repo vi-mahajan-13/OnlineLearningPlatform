@@ -1,26 +1,114 @@
 <%= form_with model: @course do |form| %>
-  <div class="form-group">
-    <%= form.label :title %><br>
-    <%= form.text_field :title, class: "form-control" %>
-  </div>
+  <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 80vh; padding-top: 0;">
+    <div class="col-md-8">
+      <div class="card border-0 rounded-4 shadow-sm custom-card">
+        <div class="card-body p-5">
+          <div class="form-group mb-4">
+            <%= form.label :title, class: "form-label font-weight-bold" %>
+            <%= form.text_field :title, class: "form-control form-control-lg custom-input", placeholder: "Enter course title", required: true %>
+          </div>
 
-  <div class="form-group">
-    <%= form.label :description %><br>
-    <%= form.text_area :description, class: "form-control" %><br>
-  </div>
+          <div class="form-group mb-4">
+            <%= form.label :description, class: "form-label font-weight-bold" %>
+            <%= form.text_area :description, class: "form-control form-control-lg custom-input", placeholder: "Enter a detailed course description", rows: 4, required: true %>
+          </div>
 
-  <% if action_name == 'new' %>
-    <div class="form-group">
-      <%= form.hidden_field :user_id, value: current_user.id %>
+          <% if action_name == 'new' %>
+            <div class="form-group mb-4">
+              <%= form.hidden_field :user_id, value: current_user.id %>
+            </div>
+          <% end %>
+
+          <div class="form-group mb-4">
+            <%= form.label :category_id, "Category", class: "form-label font-weight-bold" %>
+            <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: "Select a category" }, class: "form-control form-control-lg custom-input" %>
+          </div>
+
+          <div class="form-group text-center mb-4">
+            <%= form.submit "Create Course", class: "btn btn-warning btn-lg rounded-pill px-4 mb-3" %>
+          </div>
+
+          <div class="text-center">
+            <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3' %>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= form.label :category_id, "Category" %><br>
-    <%= form.collection_select :category_id, Category.all, :id, :name, { include_blank: "Select a category" }, class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= form.submit class: "btn btn-primary" %>
-  </div>
+  <style>
+    .custom-card {
+      background-color: #f9f9f9;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-input {
+      border-radius: 10px;
+      font-size: 1.1rem;
+      padding: 0.75rem 1.25rem;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .custom-input:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    }
+
+    .form-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .card-title {
+      font-size: 1.6rem;
+      color: #333;
+    }
+
+    .btn-warning {
+      background-color: #f0ad4e;
+      border-color: #f0ad4e;
+      font-size: 1.25rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-warning:hover {
+      background-color: #ec971f;
+      border-color: #ec971f;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      font-size: 1.25rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+
+    body {
+      margin-top: 0 !important;
+    }
+
+    .container-fluid {
+      padding-top: 0 !important;
+    }
+
+    .col-md-8 {
+      margin-top: 0 !important;
+    }
+
+    .form-group {
+      margin-top: 0;
+    }
+  </style>
 <% end %>

@@ -12,10 +12,16 @@ class Ability
       can :manage, Lesson, course: { user_id: user.id }
       can :read, Course
       can :read, Lesson, course: { user_id: user.id }
+      can :create, Category
+      can :read, Category
     elsif user.student?
       can :read, Course
       can :read, Lesson, course: { enrolled_students: { id: user.id } }
       cannot :read, Lesson, course: { enrolled_students: { id: nil } }
+      cannot :manage, Category
+      can :read, Category
+      cannot :update, Category
+      cannot :destroy, Category
     end
   end
 end

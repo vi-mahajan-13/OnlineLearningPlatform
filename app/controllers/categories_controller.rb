@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+  load_and_authorize_resource
+
   def index
     @categories = Category.all
   end
@@ -11,6 +13,7 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+    authorize! :create, @category  # Make sure students can't create categories
   end
 
   def create
@@ -21,6 +24,25 @@ class CategoriesController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    # This action should be restricted for students
+    authorize! :update, @category  # Ensure authorization for edit
+  end
+
+  def update
+    if @category.update(category_params)
+      redirect_to @category, notice: 'Category was successfully updated'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    authorize! :destroy, @category  # Ensure authorization for destroy action
+    @category.destroy
+    redirect_to categories_url, notice: 'Category was successfully destroyed'
   end
 
   private

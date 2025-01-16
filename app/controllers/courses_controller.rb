@@ -10,9 +10,6 @@ class CoursesController < ApplicationController
   end
 
   def show
-    if params[:category_id]
-      @category = Category.find(params[:category_id])
-    end
   end
 
   def new

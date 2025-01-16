@@ -9,18 +9,21 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/categories">Categories</a>
-        </li>
-
-        <li class="nav-item">
-          <%= form_tag courses_path, method: :get, class: 'd-flex' do %>
-            <%= text_field_tag :q, params[:q], placeholder: 'Search...', class: 'form-control me-2' %>
-            <%= submit_tag 'Search', class: 'btn btn-outline-success' %>
+      <ul class="navbar-nav ms-auto d-flex align-items-center w-100">  <!-- Allowing flex for right side items -->
+        
+        <!-- Search field, stretched horizontally -->
+        <li class="nav-item flex-grow-1">
+          <%= form_tag courses_path, method: :get, class: 'd-flex w-100' do %>
+            <%= text_field_tag :q, params[:q], placeholder: 'Search...', class: 'form-control me-2 w-100' %>
           <% end %>
         </li>
 
+        <!-- Categories link -->
+        <li class="nav-item">
+          <a class="nav-link" href="/categories">Categories</a>
+        </li>
+        
+        <!-- Conditional links based on user role -->
         <% if current_user && current_user.student? %>
           <li class="nav-item">
             <a class="nav-link" href="<%= courses_path %>">Courses</a>
@@ -47,6 +50,7 @@
           </li>
         <% end %>
 
+        <!-- Sign In / Sign Up links -->
         <% if user_signed_in? %>
           <li class="nav-item">
             <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'btn-sign-out nav-link' %>

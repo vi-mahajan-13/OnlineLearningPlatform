@@ -10,7 +10,7 @@ class Ability
       can :create, Lesson, course: { user_id: user.id } 
       can :manage, Course, user_id: user.id
       can :manage, Lesson, course: { user_id: user.id }
-      can :read, Course, user_id: user.id
+      can :read, Course
       can :read, Lesson, course: { user_id: user.id }
     elsif user.student?
       can :read, Course

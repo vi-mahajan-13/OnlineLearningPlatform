@@ -13,7 +13,7 @@
                   <%= course.description %>
                 </p>
                 <!-- Smaller View Button -->
-                <%= link_to 'View', course_path(course.id), class: 'btn btn-primary btn-sm rounded-pill' %>
+                <%= link_to 'View', course_path(course.id), class: 'btn btn-primary btn-sm rounded-pill view-button' %>
               </div>
             </div>
           </div>
@@ -26,6 +26,48 @@
     <% end %>
   </div>
 
-  <!-- Flash Notice -->
   <p style="color: green"><%= notice %></p>
+
+  <div class="text-center mt-4">
+    <% if current_user.instructor? || current_user.admin? %>
+      <%= link_to 'Create course', new_course_path, class: 'btn btn-warning btn-lg rounded-pill px-4 mb-3' %>
+    <% end %>
+    <%= link_to 'Back to categories', categories_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3'%>
+    <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3'%>
+  </div>
 </div>
+
+<style>
+  /* Hover effect */
+  .hover-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  /* Card hover effect */
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Button styling */
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-sm {
+    padding: 6px 12px; /* Smaller padding for the view button */
+    font-size: 0.875rem; /* Smaller font size */
+  }
+
+  /* Custom styling for the View button */
+  .view-button {
+    font-size: 0.9rem; /* Adjust font size */
+    padding: 8px 15px; /* Reduce padding for better button size */
+  }
+
+  /* Card styling consistency */
+  .card-body {
+    padding: 20px;
+  }
+</style>

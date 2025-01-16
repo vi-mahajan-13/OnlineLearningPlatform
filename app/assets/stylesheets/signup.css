@@ -98,3 +98,17 @@
 .signup .container .alert-danger, .signin .container .alert-danger {
   margin-bottom: 20px;
 }
+
+/* Custom Sign Out button */
+.btn-sign-out {
+  background-color: #dc3545; /* Red background */
+  color: white; /* White text */
+  border: none; /* Remove border */
+  padding: 8px 16px; /* Adjust padding */
+  font-size: 1rem; /* Adjust font size */
+  border-radius: 30px; /* Rounded corners */
+}
+
+.btn-sign-out:hover {
+  background-color: #c82333; /* Darker red on hover */
+}

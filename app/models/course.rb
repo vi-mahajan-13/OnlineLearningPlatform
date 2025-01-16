@@ -1,4 +1,6 @@
 class Course < ApplicationRecord
+  include Searchable
+  
   belongs_to :user
   belongs_to :category
   has_many :lessons, dependent: :destroy

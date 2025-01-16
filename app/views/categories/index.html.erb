@@ -22,10 +22,10 @@
   <!-- Action Buttons -->
   <div class="text-center mt-4">
     <% if current_user.instructor? || current_user.admin? %>
-      <%= link_to 'Create your own category', new_category_path, class: 'btn btn-success btn-lg rounded-pill px-4 mb-3' %><br>
-      <%= link_to 'Create course', new_course_path, class: 'btn btn-warning btn-lg rounded-pill px-4 mb-3' %><br>
+      <%= link_to 'Create your own category', new_category_path, class: 'btn btn-success btn-lg rounded-pill px-4 mb-3' %>
+      <%= link_to 'Create course', new_course_path, class: 'btn btn-warning btn-lg rounded-pill px-4 mb-3' %>
     <% end %>
-    <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4' %>
+    <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3'%>
   </div>
 </div>
 

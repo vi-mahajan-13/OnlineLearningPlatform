@@ -1,9 +1,59 @@
-<h1>This is lessons listing page of a particular course based on id</h1>
+<h1 class="text-center mb-4">Lessons for <%= @course.title %></h1>
 
-<% @lessons.each do |lesson| %>   
-    <h2><%= lesson.title %></h2>  
-    <p><%= lesson.content %></p> 
-    <%= link_to 'View', course_lesson_path(id: lesson.id) %><br>
-<% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <% @lessons.each do |lesson| %>  
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg border-0 rounded-3 hover-scale">
+          <div class="card-body text-center">
+            <h5 class="card-title text-dark fw-bold mb-3">
+              <%= lesson.title %>
+            </h5>
+            <p class="card-text text-muted mb-3">
+              <%= truncate(lesson.content, length: 150) %> <!-- Shows first 150 characters of the content -->
+            </p>
+            <%= link_to 'View Lesson', course_lesson_path(id: lesson.id), class: 'btn btn-primary btn-sm rounded-pill px-3 py-2 text-decoration-none' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 
-<%= link_to 'Back to course', course_path(@course) %>
+  <div class="text-center mt-4">
+    <%= link_to 'Back to Course', course_path(@course), class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3' %>
+  </div>
+</div>
+
+<style>
+  .hover-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-primary {
+    font-size: 1rem;
+    padding: 10px 20px;
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: none; /* Remove any button outline */
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  .btn-primary:focus, .btn-primary:active {
+    outline: none; /* Remove outline on focus/active */
+    box-shadow: none;
+  }
+
+  .btn-sm {
+    font-size: 0.875rem;  /* Smaller font size for the View Lesson button */
+    padding: 8px 15px;  /* Smaller padding for a compact button */
+  }
+</style>

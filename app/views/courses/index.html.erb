@@ -1,60 +1,31 @@
 <div class="container">
   <div class="row justify-content-center">
-    <% @courses.each do |course| %>  
-      <div class="col-md-4 mb-4">
-        <div class="card shadow-lg border-0 rounded-3 hover-scale">
-          <div class="card-body text-center">
-            <h5 class="card-title text-dark fw-bold mb-3">
-              <%= link_to course.title, course_path(course.id), class: 'text-decoration-none text-dark' %>
-            </h5>
-            <p class="card-text text-muted">
-              <%= course.description %>
-            </p>
-            <!-- Smaller View Button -->
-            <%= link_to 'View', course_path(course.id), class: 'btn btn-primary btn-sm rounded-pill' %>
+    <% if @courses.any? %>
+      <div class="row">
+        <% @courses.each do |course| %>  
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-lg border-0 rounded-3 hover-scale">
+              <div class="card-body text-center">
+                <h5 class="card-title text-dark fw-bold mb-3">
+                  <%= link_to course.title, course_path(course.id), class: 'text-decoration-none text-dark' %>
+                </h5>
+                <p class="card-text text-muted">
+                  <%= course.description %>
+                </p>
+                <!-- Smaller View Button -->
+                <%= link_to 'View', course_path(course.id), class: 'btn btn-primary btn-sm rounded-pill' %>
+              </div>
+            </div>
           </div>
-        </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="alert alert-warning text-center" role="alert">
+        No courses found for your search.
       </div>
     <% end %>
   </div>
 
-  <!-- Action Buttons -->
-  <div class="text-center mt-4">
-    <% if current_user.instructor? %>
-      <%= link_to 'Create Course', new_course_path, class: 'btn btn-success btn-lg rounded-pill px-4 mb-3' %><br>
-    <% end %>
-    <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4' %>
-  </div>
+  <!-- Flash Notice -->
+  <p style="color: green"><%= notice %></p>
 </div>
-
-<style>
-  .hover-scale:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .btn-primary, .btn-success {
-    font-size: 1.1rem;
-    padding: 12px 25px;
-  }
-
-  .btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-  }
-
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-
-  /* Custom style for the smaller 'View' button */
-  .btn-sm {
-    padding: 6px 15px;
-    font-size: 0.875rem;
-  }
-</style>

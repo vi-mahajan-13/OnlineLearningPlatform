@@ -1,5 +1,3 @@
-<h1 class="text-center my-5 text-primary">Course: <%= @course.title %></h1>
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8 mb-4">
@@ -32,21 +30,21 @@
 
           <div class="mt-4">
             <% if current_user.enrolled_courses.include?(@course) || current_user.courses.include?(@course) %>
-              <%= link_to 'View Lessons', course_lessons_path(@course), class: 'btn btn-primary btn-sm rounded-pill' %><br>
-              <%= link_to 'UnEnroll', course_enrollment_path(@course.id), data: { turbo_method: :delete }, class: 'btn btn-danger btn-sm rounded-pill mt-3' if current_user.student? %><br>
+              <%= link_to 'View Lessons', course_lessons_path(@course), class: 'btn btn-primary btn-sm rounded-pill mt-3' %>
+              <%= link_to 'UnEnroll', course_enrollment_path(@course.id), data: { turbo_method: :delete }, class: 'btn btn-danger btn-sm rounded-pill mt-3' if current_user.student? || current_user.admin? %>
             <% else %>
-              <%= link_to 'Enroll', course_enrollments_path(@course.id), data: { turbo_method: :post }, class: 'btn btn-primary btn-sm rounded-pill mt-3' %><br>
+              <%= link_to 'Enroll', course_enrollments_path(@course.id), data: { turbo_method: :post }, class: 'btn btn-primary btn-sm rounded-pill mt-3' %>
             <% end %>
 
             <% if current_user.instructor? %>
-              <%= link_to 'Add lessons', new_course_lesson_path(course_id: @course.id), class: 'btn btn-success btn-lg rounded-pill mt-3' %><br>
+              <%= link_to 'Add lessons', new_course_lesson_path(course_id: @course.id), class: 'btn btn-success btn-sm rounded-pill mt-3' %>
             <% end %>
           </div>
 
           <!-- Navigation Links -->
           <div class="text-center mt-4">
             <% if current_user.student? %>
-              <%= link_to 'All courses', courses_path, class: 'btn btn-light btn-lg rounded-pill px-4' %><br>
+              <%= link_to 'All courses', courses_path, class: 'btn btn-light btn-lg rounded-pill px-4' %>
               <%= link_to 'My learning', courses_path(clicked_my_learning: 'my_learning'), class: 'btn btn-light btn-lg rounded-pill px-4' %><br>
             <% end %>
 

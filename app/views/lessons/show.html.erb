@@ -1,17 +1,88 @@
-<h1>This is lesson show page of a particular course based on id</h1>
+<h1 class="text-center mb-4">Lesson: <%= @lesson.title %></h1>
 
-<h1><%= @lesson.title %></h1>
-<p><%= @lesson.content %></p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0 rounded-3 hover-scale">
+        <div class="card-body">
+          <h3 class="card-title text-dark fw-bold mb-3">
+            <%= @lesson.title %>
+          </h3>
+          <p class="card-text text-muted">
+            <%= @lesson.content %>
+          </p>
 
-<% if current_user.student? %>
-  <% @completed_lesson = CompletedLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id) %>
-  <% if @completed_lesson %>
-    <%= link_to 'InComplete', course_lesson_completed_lesson_path(lesson_id: @lesson.id), data: { turbo_method: :delete } %><br>
-  <% else %>
-    <%= link_to 'Complete', course_lesson_completed_lessons_path(lesson_id: @lesson.id), data: { turbo_method: :post } %><br>
-  <% end %>
-<% end %>
+          <% if current_user.student? %>
+            <% @completed_lesson = CompletedLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id) %>
+            <% if @completed_lesson %>
+              <%= link_to 'Mark as Incomplete', course_lesson_completed_lesson_path(lesson_id: @lesson.id), data: { turbo_method: :delete }, class: 'btn btn-warning btn-sm rounded-pill px-3 py-2' %><br>
+            <% else %>
+              <%= link_to 'Mark as Complete', course_lesson_completed_lessons_path(lesson_id: @lesson.id), data: { turbo_method: :post }, class: 'btn btn-success btn-sm rounded-pill px-3 py-2' %><br>
+            <% end %>
+          <% end %>
 
-<%= link_to 'Next Lesson', course_lesson_path(id: @next_lesson.id) if @next_lesson %>
-<%= link_to 'Previous Lesson', course_lesson_path(id: @previous_lesson.id) if @previous_lesson %><br>
-<%= link_to "Back to lessons", course_lessons_path %>
+          <div class="mt-3">
+            <%= link_to 'Next Lesson', course_lesson_path(id: @next_lesson.id), class: 'btn btn-primary btn-sm rounded-pill px-3 py-2' if @next_lesson %>
+            <%= link_to 'Previous Lesson', course_lesson_path(id: @previous_lesson.id), class: 'btn btn-primary btn-sm rounded-pill px-3 py-2' if @previous_lesson %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <%= link_to "Back to Lessons", course_lessons_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3' %>
+  </div>
+</div>
+
+<style>
+  .hover-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-primary, .btn-success, .btn-warning {
+    font-size: 1rem;
+    padding: 10px 20px;
+    box-shadow: none; /* Remove any button outline */
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+
+  .btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+  }
+
+  .btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+  }
+
+  .btn-sm {
+    font-size: 0.875rem;  /* Smaller font size for buttons */
+    padding: 8px 15px;  /* Smaller padding for compact buttons */
+  }
+</style>

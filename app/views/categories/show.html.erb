@@ -1,8 +1,57 @@
-<h1><%= @category.name %></h1><br>
+<h1 class="text-center mb-4"><%= @category.name %></h1>
 
-<ul>
-  <% @courses.each do |course| %>  
-    <li><%= course.title %></li>  
-    <%= link_to 'View', course_path(course.id) %><br>
-  <% end %>
-</ul> 
+<div class="container">
+  <div class="row justify-content-center">
+    <% @courses.each do |course| %>  
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-lg border-0 rounded-3 hover-scale">
+          <div class="card-body text-center">
+            <h5 class="card-title text-dark fw-bold mb-3">
+              <%= link_to course.title, course_path(course.id), class: 'text-decoration-none text-dark' %>
+            </h5>
+            <!-- View Button -->
+            <%= link_to 'View', course_path(course.id),  class: 'btn btn-primary btn-sm rounded-pill' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-4">
+    <%= link_to 'Back to Categories', categories_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3' %>
+  </div>
+</div>
+
+<style>
+  .hover-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-primary {
+    font-size: 1rem;
+    padding: 10px 20px;
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: none;  /* Remove any button outline */
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  .btn-primary:focus, .btn-primary:active {
+    outline: none;  /* Remove outline on focus/active */
+    box-shadow: none;
+  }
+
+  .btn-sm {
+    font-size: 0.875rem;  /* Smaller font size for the View button */
+    padding: 8px 15px;  /* Smaller padding for a compact button */
+  }
+</style>

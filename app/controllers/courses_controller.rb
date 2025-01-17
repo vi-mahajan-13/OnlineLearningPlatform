@@ -10,6 +10,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @all_lessons_completed = all_lessons_completed?(@course, current_user)
   end
 
   def new
@@ -38,6 +39,15 @@ class CoursesController < ApplicationController
   end
 
   private
+
+  def all_lessons_completed?(course, user)
+    course.lessons.each do |lesson|
+      unless CompletedLesson.exists?(user_id: user.id, lesson_id: lesson.id, completed: true)
+        return false
+      end
+    end
+    true
+  end
 
   def set_course
     @course = Course.find(params[:id])

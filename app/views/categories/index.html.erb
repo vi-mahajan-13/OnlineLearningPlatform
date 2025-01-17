@@ -19,7 +19,6 @@
     <% end %>
   </div>
 
-  <!-- Action Buttons -->
   <div class="text-center mt-4">
     <% if current_user.instructor? || current_user.admin? %>
       <%= link_to 'Create your own category', new_category_path, class: 'btn btn-success btn-lg rounded-pill px-4 mb-3' %>

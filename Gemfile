@@ -81,3 +81,5 @@ gem 'devise-i18n'
 gem 'elasticsearch-model'
 
 gem 'elasticsearch-rails'
+
+gem 'prawn'

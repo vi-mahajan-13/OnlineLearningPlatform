@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_course, only: [:show, :edit, :update]
+  before_action :set_course, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
   def index
@@ -36,6 +36,11 @@ class CoursesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @course.destroy
+    redirect_to courses_path, notice: 'Course and its lessons and enrollments were successfully deleted.'
   end
 
   private

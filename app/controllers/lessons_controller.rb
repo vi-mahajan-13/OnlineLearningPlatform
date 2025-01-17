@@ -41,6 +41,11 @@ class LessonsController < ApplicationController
     end
   end
 
+  def destroy
+    @lesson.destroy
+      redirect_to course_lessons_path(course_id: @lesson.course.id), notice: 'lessons were successfully deleted.'
+  end
+
   private
 
   def set_course

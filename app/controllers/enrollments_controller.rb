@@ -2,9 +2,14 @@ class EnrollmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_course
   before_action :set_enrollment, only: [:destroy]
+  load_and_authorize_resource
 
   def index
     
+  end
+   
+  def show
+
   end
 
   def create
@@ -24,6 +29,9 @@ class EnrollmentsController < ApplicationController
     else
       redirect_to course_path(@course), alert: 'Enrollment not found'
     end
+  end
+
+  def edit
   end
 
   private

@@ -27,8 +27,7 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    # This action should be restricted for students
-    authorize! :update, @category  # Ensure authorization for edit
+    authorize! :update, @category
   end
 
   def update
@@ -40,7 +39,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    authorize! :destroy, @category  # Ensure authorization for destroy action
+    authorize! :destroy, @category
     @category.destroy
     redirect_to categories_url, notice: 'Category was successfully destroyed'
   end

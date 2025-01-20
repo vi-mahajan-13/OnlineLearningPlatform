@@ -13,6 +13,13 @@
               <%= truncate(lesson.content, length: 150) %> <!-- Shows first 150 characters of the content -->
             </p>
             <%= link_to 'View Lesson', course_lesson_path(id: lesson.id), class: 'btn btn-primary btn-sm rounded-pill px-3 py-2 text-decoration-none' %>
+            <% if (current_user.instructor? && current_user == lesson.course.user) || current_user.admin? %>
+              <!-- Edit Button -->
+              <%= link_to 'Edit', edit_course_lesson_path(lesson.course_id, lesson.id), class: 'btn btn-warning btn-sm rounded-pill mx-2' %>
+              
+              <!-- Delete Button -->
+              <%= button_to 'Delete', course_lesson_path(lesson.course_id, lesson.id), method: :delete, class: 'btn btn-danger btn-sm rounded-pill' %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -21,6 +28,7 @@
 
   <div class="text-center mt-4">
     <%= link_to 'Back to Course', course_path(@course), class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3' %>
+    <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3'%>
   </div>
 </div>
 

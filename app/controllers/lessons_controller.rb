@@ -11,7 +11,7 @@ class LessonsController < ApplicationController
 
   def show
     @next_lesson = @lesson.next_lesson 
-    @previous_lesson = @lesson.previous_lesson 
+    @previous_lesson = @lesson.previous_lesson
   end
 
   def new
@@ -30,7 +30,7 @@ class LessonsController < ApplicationController
   end
 
   def edit
-    
+  
   end
 
   def update

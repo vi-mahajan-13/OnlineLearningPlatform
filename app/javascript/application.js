@@ -1,5 +1,5 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "controllers"
-import "popper"
-import "bootstrap"
+import "jquery"  // This will load jQuery
+import "popper"  // Popper.js
+import "bootstrap"  // Bootstrap JS (which depends on jQuery)
+import "@hotwired/turbo-rails"  // Turbo functionality
+import "controllers"  // Stimulus controllers

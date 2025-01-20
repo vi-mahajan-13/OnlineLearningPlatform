@@ -22,6 +22,12 @@ class Ability
       can :read, Category
       cannot :update, Category
       cannot :destroy, Category
+      can :create, Enrollment
+      can :destroy, Enrollment
+      cannot :read, Enrollment
+      can :create, CompletedLesson
+      can :destroy, CompletedLesson
+      cannot :read, CompletedLesson
     end
   end
 end

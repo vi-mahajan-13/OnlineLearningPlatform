@@ -38,9 +38,9 @@
           <div class="mt-4">
             <% if current_user.enrolled_courses.include?(@course) || current_user.courses.include?(@course) %>
               <%= link_to 'View Lessons', course_lessons_path(@course), class: 'btn btn-primary btn-sm rounded-pill mt-3' %>
-              <%= link_to 'UnEnroll', course_enrollment_path(@course.id), data: { turbo_method: :delete }, class: 'btn btn-danger btn-sm rounded-pill mt-3' if current_user.student? || current_user.admin? %>
+              <%= link_to 'UnEnroll', course_enrollment_path(@course.id), data: { turbo_method: :delete }, class: 'btn btn-danger btn-sm rounded-pill mt-3' unless current_user.instructor? && current_user.courses.include?(@course) %>
             <% else %>
-              <%= link_to 'Enroll', course_enrollments_path(@course.id), data: { turbo_method: :post }, class: 'btn btn-primary btn-sm rounded-pill mt-3' %>
+              <%= link_to 'Enroll', course_enrollments_path(@course.id), data: { turbo_method: :post }, class: 'btn btn-primary btn-sm rounded-pill mt-3' unless current_user.instructor? && current_user.courses.include?(@course) %>
             <% end %>
 
             <% if current_user.instructor? && current_user == @course.user %>

@@ -15,7 +15,7 @@
                 <!-- View Button -->
                 <%= link_to 'View', course_path(course.id), class: 'btn btn-primary btn-sm rounded-pill view-button' %>
 
-                <% if can?(:edit, Course) || can?(:delete, Course) %>
+                <% if (current_user.instructor? && current_user == course.user) || current_user.admin? %>
                   <!-- Edit Button -->
                   <%= link_to 'Edit', edit_course_path(course.id), class: 'btn btn-warning btn-sm rounded-pill mx-2' %>
                   

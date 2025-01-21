@@ -18,10 +18,10 @@
               <% @completed_lesson = CompletedLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id) %>
               <% if @completed_lesson %>
                 <%= link_to 'Mark as Incomplete', course_lesson_completed_lesson_path(lesson_id: @lesson.id), 
-                          method: :delete, data: { turbo_method: :delete }, class: 'btn btn-warning btn-sm rounded-pill px-3 py-2' %><br>
+                          method: :delete, data: { turbo_method: :delete }, class: 'btn btn-success btn-sm rounded-pill px-3 py-2' %><br>
               <% else %>
                 <%= link_to 'Mark as Complete', course_lesson_completed_lessons_path(lesson_id: @lesson.id), 
-                          method: :post, data: { turbo_method: :post }, class: 'btn btn-success btn-sm rounded-pill px-3 py-2' %><br>
+                          method: :post, data: { turbo_method: :post }, class: 'btn btn-warning btn-sm rounded-pill px-3 py-2' %><br>
               <% end %>
             <% end %>
 

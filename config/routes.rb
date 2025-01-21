@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     resources :lessons do 
       resources :completed_lessons
     end
-    resources :enrollments
+    resources :enrollments, except: [:edit, :update, :new]
+ 
 
     member do
       get 'certificate', to: 'certificates#show', as: 'certificate'

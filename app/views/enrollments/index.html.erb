@@ -1,1 +1,61 @@
-<h1>This is enrollment listing page</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <% if @enrollments.any? %>
+      <div class="row">
+        <% @enrollments.each do |enrollment| %>  
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-lg border-0 rounded-3 hover-scale">
+              <div class="card-body text-center">
+                <h5 class="card-title text-dark fw-bold mb-3">
+                  <%= enrollment.user.email %>
+                </h5>
+                <p class="card-text text-muted">
+                  <%= enrollment.course.title %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="alert alert-warning text-center" role="alert">
+        No enrollments found for your search.
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<style>
+  .hover-scale:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-sm {
+    padding: 6px 12px; 
+    font-size: 0.875rem; 
+  }
+
+  .view-button {
+    font-size: 0.875rem; 
+    padding: 6px 12px; 
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+  .mx-2 {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+</style>

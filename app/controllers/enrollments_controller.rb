@@ -5,7 +5,7 @@ class EnrollmentsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    
+    @enrollments = @course.enrollments
   end
    
   def show
@@ -29,9 +29,6 @@ class EnrollmentsController < ApplicationController
     else
       redirect_to course_path(@course), alert: 'Enrollment not found'
     end
-  end
-
-  def edit
   end
 
   private

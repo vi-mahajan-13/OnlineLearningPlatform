@@ -12,7 +12,6 @@ class Ability
       can :manage, Lesson, course: { user_id: user.id }
       can :read, Course
       can :read, Lesson, course: { user_id: user.id }
-      can :create, Category
       can :read, Category
     elsif user.student?
       can :read, Course

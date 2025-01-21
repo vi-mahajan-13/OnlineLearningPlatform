@@ -53,6 +53,8 @@
                 <%= button_to 'Delete', course_path(@course.id), method: :delete, class: 'btn btn-danger btn-sm rounded-pill mx-2' %>
               </div>
             <% end %>
+            <%= link_to 'Enrollments', course_enrollments_path(course.id), class: 'btn btn-primary btn-sm rounded-pill' if current_user.admin? %>
+
           </div>
         </div>
       </div>

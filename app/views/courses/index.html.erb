@@ -16,12 +16,10 @@
                 <%= link_to 'View', course_path(course.id), class: 'btn btn-primary btn-sm rounded-pill view-button' %>
 
                 <% if (current_user.instructor? && current_user == course.user) || current_user.admin? %>
-                  <!-- Edit Button -->
                   <%= link_to 'Edit', edit_course_path(course.id), class: 'btn btn-warning btn-sm rounded-pill mx-2' %>
-                  
-                  <!-- Delete Button -->
                   <%= button_to 'Delete', course_path(course.id), method: :delete, class: 'btn btn-danger btn-sm rounded-pill' %>
                 <% end %>
+                <%= link_to 'Enrollments', course_enrollments_path(course.id), class: 'btn btn-primary btn-sm rounded-pill' if current_user.admin? %>
               </div>
             </div>
           </div>

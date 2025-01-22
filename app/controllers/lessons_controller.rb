@@ -21,16 +21,17 @@ class LessonsController < ApplicationController
 
   def create
     @lesson = @course.lessons.new(lesson_params)
-
+    
     if @lesson.save
       redirect_to course_lessons_path(@course), notice: 'Lesson successfully created.'
     else
       render :new
     end
   end
+  
+
 
   def edit
-  
   end
 
   def update
@@ -43,7 +44,7 @@ class LessonsController < ApplicationController
 
   def destroy
     @lesson.destroy
-      redirect_to course_lessons_path(course_id: @lesson.course.id), notice: 'lessons were successfully deleted.'
+    redirect_to course_lessons_path(course_id: @lesson.course.id), notice: 'Lesson was successfully deleted.'
   end
 
   private
@@ -57,6 +58,6 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title, :content)
+    params.require(:lesson).permit(:title, :content, pictures: [])
   end
 end

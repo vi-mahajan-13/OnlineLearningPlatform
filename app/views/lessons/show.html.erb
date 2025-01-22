@@ -14,6 +14,15 @@
               <%= @lesson.content %>
             </p>
 
+            <!-- Display images below the content -->
+            <div class="lesson-images">
+              <% @lesson.pictures.each do |picture| %>
+                <div class="lesson-image mb-3">
+                  <%= image_tag url_for(picture), class: 'img-fluid rounded' %>
+                </div>
+              <% end %>
+            </div>
+
             <% if current_user.student? %>
               <% @completed_lesson = CompletedLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id) %>
               <% if @completed_lesson %>
@@ -63,6 +72,15 @@
 
   .card:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .lesson-images {
+    margin-top: 20px;
+  }
+
+  .lesson-image img {
+    max-width: 100%;
+    height: auto;
   }
 
   .btn-primary, .btn-success, .btn-warning {

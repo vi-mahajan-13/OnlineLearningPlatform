@@ -11,10 +11,15 @@ class User < ApplicationRecord
   has_many :lessons, through: :completed_lessons
 
   after_initialize :set_default_role, if: :new_record?
+  after_create :send_welcome_email
 
   private
 
   def set_default_role
     self.role ||= :student  
+  end
+  
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_now
   end
 end

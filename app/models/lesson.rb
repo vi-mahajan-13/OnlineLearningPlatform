@@ -3,6 +3,9 @@ class Lesson < ApplicationRecord
   has_many :completed_lessons, dependent: :destroy
   has_many :users, through: :completed_lessons
   has_many_attached :pictures
+
+  validates :title, presence: true
+  validates :content, presence: true
   
   def next_lesson
     course.lessons.where('created_at > ?', self.created_at).order(:created_at).first

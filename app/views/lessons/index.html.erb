@@ -1,5 +1,3 @@
-<h1 class="text-center mb-4">Lessons for <%= @course.title %></h1>
-
 <div class="container">
   <div class="row justify-content-center">
     <% @lessons.each do |lesson| %>  
@@ -7,12 +5,8 @@
         <div class="card shadow-lg border-0 rounded-3 hover-scale">
           <div class="card-body text-center">
             <h5 class="card-title text-dark fw-bold mb-3">
-              <%= lesson.title %>
+              <%= link_to lesson.title, course_lesson_path(id: lesson.id), class: 'text-decoration-none text-dark' %>
             </h5>
-            <p class="card-text text-muted mb-3">
-              <%= truncate(lesson.content, length: 150) %> <!-- Shows first 150 characters of the content -->
-            </p>
-            <%= link_to 'View Lesson', course_lesson_path(id: lesson.id), class: 'btn btn-primary btn-sm rounded-pill px-3 py-2 text-decoration-none' %>
             <% if can? :manage, Lesson %>
               <%= link_to 'Edit', edit_course_lesson_path(lesson.course_id, lesson.id), class: 'btn btn-warning btn-sm rounded-pill mx-2' %>
               <%= button_to 'Delete', course_lesson_path(lesson.course_id, lesson.id), method: :delete, class: 'btn btn-danger btn-sm rounded-pill mx-2' %>

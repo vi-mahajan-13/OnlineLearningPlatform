@@ -2,24 +2,35 @@
   <div class="row justify-content-center">
     <% if @courses.any? %>
       <div class="row">
-        <% @courses.each do |course| %>  
+        <% @courses.each do |course| %>
           <div class="col-md-4 mb-4">
             <div class="card shadow-lg border-0 rounded-3 hover-scale">
               <div class="card-body text-center">
+                <p>By <%= course.user.email %> </p>
+
                 <h5 class="card-title text-dark fw-bold mb-3">
                   <%= link_to course.title, course_path(course.id), class: 'text-decoration-none text-dark' %>
                 </h5>
-                <p class="card-text text-muted">
-                  <%= course.description %>
-                </p>
-                <!-- View Button -->
-                <%= link_to 'View', course_path(course.id), class: 'btn btn-primary btn-sm rounded-pill view-button' %>
 
-                <% if (current_user.instructor? && current_user == course.user) || current_user.admin? %>
+                <div class="badge bg-primary rounded-pill p-2">
+                  <%= course.lessons.count %> Lessons
+                </div>
+
+                <% if can?(:edit, course) %>
                   <%= link_to 'Edit', edit_course_path(course.id), class: 'btn btn-warning btn-sm rounded-pill mx-2' %>
+                <% end %>
+                
+                <% if can?(:destroy, course) %>
                   <%= button_to 'Delete', course_path(course.id), method: :delete, class: 'btn btn-danger btn-sm rounded-pill' %>
                 <% end %>
-                <%= link_to 'Enrollments', course_enrollments_path(course.id), class: 'btn btn-primary btn-sm rounded-pill' if current_user.admin? %>
+
+                <% if current_user.admin? %>
+                  <%= link_to 'Enrollments', course_enrollments_path(course.id), class: 'btn btn-primary btn-sm rounded-pill' %>
+                <% end %>
+
+                <% if current_user == course.user %>
+                 <p> <%= course.enrolled_students.count == 1 ? '1 student enrolled' : "#{course.enrolled_students.count} students enrolled" %> </p>
+                <% end %>
               </div>
             </div>
           </div>
@@ -32,10 +43,12 @@
     <% end %>
   </div>
 
+  <!-- Create Course Button: Show if user has permission to create courses -->
   <div class="text-center mt-4">
     <% if can? :create, Course %>
       <%= link_to 'Create course', new_course_path, class: 'btn btn-warning btn-lg rounded-pill px-4 mb-3' %>
     <% end %>
+    
     <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3'%>
   </div>
 </div>

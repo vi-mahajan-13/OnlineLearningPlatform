@@ -7,9 +7,6 @@
             <h5 class="card-title text-dark fw-bold mb-3">
               <%= link_to category.name, category_courses_path(category), class: 'text-decoration-none text-dark' %>
             </h5>
-            <p class="card-text text-muted">
-              Explore courses and resources in this category.
-            </p>
             <div class="badge bg-primary rounded-pill p-2">
               <%= category.courses.count %> Courses
             </div>

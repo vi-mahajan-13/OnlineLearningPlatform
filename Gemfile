@@ -83,3 +83,5 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
 gem 'prawn'
+
+gem 'sidekiq'

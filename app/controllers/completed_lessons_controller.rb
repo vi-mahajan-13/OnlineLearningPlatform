@@ -4,12 +4,6 @@ class CompletedLessonsController < ApplicationController
   before_action :set_completed_lesson, only: [:destroy]
   load_and_authorize_resource
 
-  def index 
-  end
-
-  def show 
-  end
-
   def create
     @completed_lesson = @lesson.completed_lessons.new(user_id: current_user.id, completed: true)
 
@@ -18,9 +12,6 @@ class CompletedLessonsController < ApplicationController
     else
       render 'lessons/show', alert: 'There was an issue with your completion'
     end
-  end
-
-  def edit
   end
   
   def destroy

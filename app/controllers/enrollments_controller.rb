@@ -1,7 +1,7 @@
 class EnrollmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_course
-  before_action :set_enrollment, only: [:destroy]
+  before_action :set_enrollment, only: [:destroy, :show]
   load_and_authorize_resource
 
   def index
@@ -9,7 +9,6 @@ class EnrollmentsController < ApplicationController
   end
    
   def show
-
   end
 
   def create

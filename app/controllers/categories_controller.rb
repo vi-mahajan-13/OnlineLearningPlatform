@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_category, only: [:show, :edit, :update]
   load_and_authorize_resource
 
   def index
@@ -7,13 +8,11 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
     @courses = @category.courses
   end
 
   def new
     @category = Category.new
-    authorize! :create, @category  # Make sure students can't create categories
   end
 
   def create
@@ -27,7 +26,6 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    authorize! :update, @category
   end
 
   def update
@@ -38,13 +36,11 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def destroy
-    authorize! :destroy, @category
-    @category.destroy
-    redirect_to categories_url, notice: 'Category was successfully destroyed'
-  end
-
   private
+
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
   def category_params
     params.require(:category).permit(:name)

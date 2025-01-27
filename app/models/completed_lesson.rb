@@ -18,7 +18,7 @@ class CompletedLesson < ApplicationRecord
     end
 
     if @completed_lessons_count == @total_lessons_count
-      SendCertificateJob.set(wait: 2.minutes).perform_later(self.user.id, @course.id)  # Pass IDs, not objects
+      SendCertificateJob.set(wait: 2.minutes).perform_later(self.user.id, @course.id)
     end
   end
 end

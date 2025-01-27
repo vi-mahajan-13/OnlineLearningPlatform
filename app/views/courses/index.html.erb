@@ -7,29 +7,32 @@
             <div class="card shadow-lg border-0 rounded-3 hover-scale">
               <div class="card-body text-center">
                 <p>By <%= course.user.email %> </p>
+                <div class="badge bg-primary rounded-pill p-2">
+                  <%= link_to course.lessons.count == 1 ? '1 lesson' : "#{course.lessons.count} lessons", course_lessons_path(course), class: 'text-decoration-none text-dark' %>
+                </div>
 
                 <h5 class="card-title text-dark fw-bold mb-3">
                   <%= link_to course.title, course_path(course.id), class: 'text-decoration-none text-dark' %>
                 </h5>
 
-                <div class="badge bg-primary rounded-pill p-2">
-                  <%= course.lessons.count %> Lessons
+                <div class="d-flex justify-content-center mb-3">
+                  <% if can?(:edit, course) %>
+                    <%= link_to 'Edit', edit_course_path(course.id), class: 'btn btn-warning btn-sm rounded-pill me-2' %>
+                  <% end %>
+                  
+                  <% if can?(:destroy, course) %>
+                    <%= button_to 'Delete', course_path(course.id), method: :delete, class: 'btn btn-danger btn-sm rounded-pill' %>
+                  <% end %>
                 </div>
 
-                <% if can?(:edit, course) %>
-                  <%= link_to 'Edit', edit_course_path(course.id), class: 'btn btn-warning btn-sm rounded-pill mx-2' %>
-                <% end %>
-                
-                <% if can?(:destroy, course) %>
-                  <%= button_to 'Delete', course_path(course.id), method: :delete, class: 'btn btn-danger btn-sm rounded-pill' %>
-                <% end %>
-
                 <% if current_user.admin? %>
-                  <%= link_to 'Enrollments', course_enrollments_path(course.id), class: 'btn btn-primary btn-sm rounded-pill' %>
-                <% end %>
-
-                <% if current_user == course.user %>
-                 <p> <%= course.enrolled_students.count == 1 ? '1 student enrolled' : "#{course.enrolled_students.count} students enrolled" %> </p>
+                  <div class="badge bg-primary rounded-pill p-2">
+                    <%= link_to course.enrolled_students.count == 1 ? '1 student enrolled' : "#{course.enrolled_students.count} students enrolled", course_enrollments_path(course.id), class: 'text-decoration-none text-dark' %>
+                  </div>
+                <% elsif current_user == course.user %>
+                  <div class="badge bg-primary rounded-pill p-2">
+                    <%= course.enrolled_students.count == 1 ? '1 student enrolled' : "#{course.enrolled_students.count} students enrolled" %>
+                  </div>                  
                 <% end %>
               </div>
             </div>
@@ -43,7 +46,6 @@
     <% end %>
   </div>
 
-  <!-- Create Course Button: Show if user has permission to create courses -->
   <div class="text-center mt-4">
     <% if can? :create, Course %>
       <%= link_to 'Create course', new_course_path, class: 'btn btn-warning btn-lg rounded-pill px-4 mb-3' %>
@@ -52,38 +54,3 @@
     <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3'%>
   </div>
 </div>
-
-<style>
-  .hover-scale:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-
-  .btn-sm {
-    padding: 6px 12px; 
-    font-size: 0.875rem; 
-  }
-
-  .view-button {
-    font-size: 0.875rem; 
-    padding: 6px 12px; 
-  }
-
-  .card-body {
-    padding: 20px;
-  }
-
-  .mx-2 {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-</style>

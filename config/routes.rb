@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :lessons do 
-      resources :completed_lessons
+      resources :completed_lessons, only: [:create, :destroy]
     end
     resources :enrollments, except: [:edit, :update, :new]
  

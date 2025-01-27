@@ -1,0 +1,33 @@
+.hover-scale:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary, .btn-success, .btn-warning {
+  font-size: 1.1rem;
+  padding: 12px 25px;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-sm {
+  padding: 6px 12px; 
+  font-size: 0.875rem; 
+}
+
+.mx-2 {
+  margin-left: 10px;
+  margin-right: 10px;
+}

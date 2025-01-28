@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_21_120225) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_28_093828) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -85,6 +85,28 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_21_120225) do
     t.index ["course_id"], name: "index_lessons_on_course_id"
   end
 
+  create_table "pictures", force: :cascade do |t|
+    t.string "name"
+    t.string "imageable_type", null: false
+    t.integer "imageable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name"
+    t.integer "age"
+    t.date "date_of_birth"
+    t.string "city"
+    t.string "pincode"
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -107,4 +129,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_21_120225) do
   add_foreign_key "enrollments", "courses", on_delete: :cascade
   add_foreign_key "enrollments", "users", on_delete: :cascade
   add_foreign_key "lessons", "courses", on_delete: :cascade
+  add_foreign_key "profiles", "users"
 end

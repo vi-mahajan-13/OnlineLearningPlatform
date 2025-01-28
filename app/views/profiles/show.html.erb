@@ -1,0 +1,56 @@
+<h1 class="text-center mb-4">Your Profile</h1>
+
+<div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="col-md-8">
+    <div class="card border-0 rounded-4 shadow-sm custom-card">
+      <div class="card-body p-5">
+
+        <div class="course-image mb-4">
+          <% if @profile.picture.present? %>
+            <%= image_tag @profile.picture.image, class: "img-fluid rounded-3 mb-3", style: "max-height: 100px; object-fit: cover;" %>
+          <% else %>
+            <p>No image available</p>
+          <% end %>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label font-weight-bold">Name</label>
+          <p class="form-control-static"><%= @profile.name %></p>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label font-weight-bold">Age</label>
+          <p class="form-control-static"><%= @profile.age %></p>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label font-weight-bold">Date of Birth</label>
+          <p class="form-control-static"><%= @profile.date_of_birth %></p>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label font-weight-bold">City</label>
+          <p class="form-control-static"><%= @profile.city %></p>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label font-weight-bold">Pincode</label>
+          <p class="form-control-static"><%= @profile.pincode %></p>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label font-weight-bold">Phone Number</label>
+          <p class="form-control-static"><%= @profile.phone_number %></p>
+        </div>
+
+        <div class="form-group text-center mb-4">
+          <%= link_to 'Edit Profile', edit_profile_path, class: 'btn btn-warning btn-lg rounded-pill px-4 mb-3' %>
+        </div>
+
+        <div class="text-center">
+          <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

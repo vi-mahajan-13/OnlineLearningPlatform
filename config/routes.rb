@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+  root to: 'courses#index'
   devise_for :users
+  resource :profile, only: [:show, :new, :create, :edit, :update]
+  
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :categories do
@@ -13,7 +15,6 @@ Rails.application.routes.draw do
     end
     resources :enrollments, except: [:edit, :update, :new]
  
-
     member do
       get 'certificate', to: 'certificates#show', as: 'certificate'
     end

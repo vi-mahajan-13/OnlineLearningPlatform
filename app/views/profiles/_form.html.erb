@@ -1,0 +1,53 @@
+<%= form_with model: @profile, url: profile_path(@profile) do |form| %>
+  <div class="container-fluid d-flex justify-content-center align-items-center" style="min-height: 80vh; padding-top: 0;">
+    <div class="col-md-8">
+      <div class="card border-0 rounded-4 shadow-sm custom-card">
+        <div class="card-body p-5">
+
+          <div class="form-group mb-4">
+            <%= form.label :picture, "Upload Profile Picture", class: "form-label font-weight-bold" %>
+            <%= form.file_field :picture, class: "form-control form-control-lg custom-input" %>
+          </div>
+
+          <div class="form-group mb-4">
+            <%= form.label :name, class: "form-label font-weight-bold" %>
+            <%= form.text_field :name, class: "form-control form-control-lg custom-input", placeholder: "Enter your name", required: true %>
+          </div>
+
+          <div class="form-group mb-4">
+            <%= form.label :age, class: "form-label font-weight-bold" %>
+            <%= form.number_field :age, class: "form-control form-control-lg custom-input", placeholder: "Enter your age", required: true %>
+          </div>
+
+          <div class="form-group mb-4">
+            <%= form.label :date_of_birth, class: "form-label font-weight-bold" %>
+            <%= form.date_field :date_of_birth, class: "form-control form-control-lg custom-input", required: true %>
+          </div>
+
+          <div class="form-group mb-4">
+            <%= form.label :city, class: "form-label font-weight-bold" %>
+            <%= form.text_field :city, class: "form-control form-control-lg custom-input", placeholder: "Enter your city", required: true %>
+          </div>
+
+          <div class="form-group mb-4">
+            <%= form.label :pincode, class: "form-label font-weight-bold" %>
+            <%= form.text_field :pincode, class: "form-control form-control-lg custom-input", placeholder: "Enter your pincode", required: true %>
+          </div>
+
+          <div class="form-group mb-4">
+            <%= form.label :phone_number, class: "form-label font-weight-bold" %>
+            <%= form.text_field :phone_number, class: "form-control form-control-lg custom-input", placeholder: "Enter your phone number", required: true %>
+          </div>
+
+          <div class="form-group text-center mb-4">
+            <%= form.submit action_name == 'new' ? "Create Profile" : "Update Profile", class: "btn btn-warning btn-lg rounded-pill px-4 mb-3" %>
+          </div>
+
+          <div class="text-center">
+            <%= link_to 'Back to Home', root_path, class: 'btn btn-primary btn-lg rounded-pill px-4 mb-3' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

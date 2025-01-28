@@ -1,0 +1,83 @@
+/* Custom card styling for profile page */
+.custom-card {
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom form group for profile information */
+.form-group {
+  margin-top: 0;
+}
+
+/* Label styling */
+.form-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Styling for text in form-control-static to match form input style */
+.form-control-static {
+  font-size: 1.1rem;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Focus state for form-control-static */
+.form-control-static:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Button styling */
+.btn-warning {
+  background-color: #f0ad4e;
+  border-color: #f0ad4e;
+  font-size: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-warning:hover {
+  background-color: #ec971f;
+  border-color: #ec971f;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-size: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+/* Body margin adjustments */
+body {
+  margin-top: 0 !important;
+}
+
+/* Container padding adjustments */
+.container-fluid {
+  padding-top: 0 !important;
+}
+
+/* Column margin adjustments */
+.col-md-8 {
+  margin-top: 0 !important;
+}
+
+/* Add some margin to the top of the card */
+.card-body {
+  margin-top: 20px;
+}

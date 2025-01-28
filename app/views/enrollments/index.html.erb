@@ -24,3 +24,24 @@
     <% end %>
   </div>
 </div>
+<div class="text-center mt-4">
+  <%= link_to "Export", course_enrollments_path(format: 'csv'), class: "export-btn" %>
+</div>
+
+
+<style>
+  .export-btn {
+    background-color: #28a745;   
+    color: white;               
+    font-size: 18px;         
+    padding: 12px 24px;  
+    border-radius: 8px;   
+    text-decoration: none; 
+    display: inline-block; 
+    transition: all 0.3s ease;
+  }
+
+  .export-btn:hover {
+    background-color: #218838;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+</style>

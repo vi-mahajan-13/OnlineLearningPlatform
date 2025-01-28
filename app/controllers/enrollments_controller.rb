@@ -6,6 +6,11 @@ class EnrollmentsController < ApplicationController
 
   def index
     @enrollments = @course.enrollments
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @enrollments.to_csv, filename: "enrollments-#{DateTime.now.strftime("%D%M%Y%H%M")}.csv" }
+    end
   end
    
   def show

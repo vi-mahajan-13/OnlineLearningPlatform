@@ -6,7 +6,8 @@ class Course < ApplicationRecord
   has_many :lessons, dependent: :destroy
   has_many :enrollments, dependent: :destroy
   has_many :enrolled_students, through: :enrollments, source: :user
-
+  has_one :picture, as: :imageable, dependent: :destroy
+  
   validates :title, presence: true
   validates :description, presence: true
   validates :category, presence: true

@@ -12,14 +12,14 @@
               <%= @lesson.content %>
             </p>
 
-            <!-- Display images below the content -->
-            <div class="lesson-images">
+            <div class="lesson-images mb-4">
               <% @lesson.pictures.each do |picture| %>
-                <div class="lesson-image mb-3">
-                  <%= image_tag url_for(picture), class: 'img-fluid rounded' %>
-                </div>
+                <% if picture.image.attached? %>
+                  <%= image_tag picture.image, class: "img-fluid mb-3 rounded-3" %>
+                <% end %>
               <% end %>
             </div>
+            
 
             <% if current_user.student? %>
               <% @completed_lesson = CompletedLesson.find_by(user_id: current_user.id, lesson_id: @lesson.id) %>

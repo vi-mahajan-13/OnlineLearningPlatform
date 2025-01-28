@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_course
-  before_action :set_lesson, only: [:show, :edit, :update]
+  before_action :set_lesson, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource :course
   load_and_authorize_resource :lesson, through: :course
 
@@ -21,22 +21,30 @@ class LessonsController < ApplicationController
 
   def create
     @lesson = @course.lessons.new(lesson_params)
-    
+
     if @lesson.save
+      if params[:lesson][:pictures].present?
+        params[:lesson][:pictures].each do |picture|
+          @lesson.pictures.create(image: picture)
+        end
+      end
       redirect_to course_lessons_path(@course), notice: 'Lesson successfully created.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
-  
-
 
   def edit
   end
 
   def update
     if @lesson.update(lesson_params)
-      redirect_to course_lessons_path(@course), notice: 'Lesson successfully updated'
+      if params[:lesson][:pictures].present?
+        params[:lesson][:pictures].each do |picture|
+          @lesson.pictures.create(image: picture)
+        end
+      end
+      redirect_to course_lessons_path(@course), notice: 'Lesson successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -58,6 +66,6 @@ class LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:title, :content, pictures: [])
+    params.require(:lesson).permit(:title, :content) 
   end
 end

@@ -19,7 +19,11 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
+  
     if @course.save
+      if params[:course][:picture].present?
+        @course.create_picture(image: params[:course][:picture])
+      end
       redirect_to @course, notice: 'Course was successfully created.'
     else
       render :new, status: :unprocessable_entity
@@ -28,9 +32,12 @@ class CoursesController < ApplicationController
 
   def edit
   end
-  
+
   def update
     if @course.update(course_params)
+      if params[:course][:picture].present?
+        @course.create_picture(image: params[:course][:picture])
+      end
       redirect_to @course, notice: 'Course was successfully updated.'
     else
       render :edit, status: :unprocessable_entity

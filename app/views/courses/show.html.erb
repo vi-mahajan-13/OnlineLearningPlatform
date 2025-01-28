@@ -3,7 +3,16 @@
     <div class="col-md-8 mb-4">
       <div class="card shadow-lg border-0 rounded-3 hover-scale">
         <div class="card-body text-center">
-          <p>By <%= @course.user.email %> </p>
+
+          <div class="course-image mb-4">
+            <% if @course.picture.present? %>
+              <%= image_tag @course.picture.image, class: "img-fluid rounded-3 mb-3", style: "max-height: 150px; object-fit: cover;" %>
+            <% else %>
+              <p>No image available</p>
+            <% end %>
+          </div>
+
+          <p>By <%= @course.user.email %></p>
           <div class="badge bg-primary rounded-pill p-2">
             <%= link_to @course.lessons.count == 1 ? '1 lesson' : "#{@course.lessons.count} lessons", course_lessons_path(@course), class: 'text-decoration-none text-dark' %>
           </div>

@@ -8,6 +8,9 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.enable_reloading = true
 
+  config.active_storage.urls = true
+  config.active_storage.current_url_options = { host: 'localhost:3000' } # Replace with your domain in production
+
   # Do not eager load code on boot.
   config.eager_load = false
 

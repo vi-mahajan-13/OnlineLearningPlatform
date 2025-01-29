@@ -3,6 +3,7 @@ class Lesson < ApplicationRecord
   has_many :completed_lessons, dependent: :destroy
   has_many :users, through: :completed_lessons
   has_many :pictures, as: :imageable,  dependent: :destroy
+  has_one_attached :video
 
   validates :title, presence: true
   validates :content, presence: true

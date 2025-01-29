@@ -5,7 +5,7 @@ class Enrollment < ApplicationRecord
   belongs_to :course
 
   def self.to_csv
-    attributes = %w{id user_name course_title created_at updated_at}
+    attributes = %w{enrollment_id user_email enrolled_at}
 
     CSV.generate(headers: true) do |csv|
       csv << attributes 
@@ -15,7 +15,6 @@ class Enrollment < ApplicationRecord
           enrollment.id,
           enrollment.user.email,
           enrollment.created_at,
-          enrollment.updated_at 
         ]
       end
     end

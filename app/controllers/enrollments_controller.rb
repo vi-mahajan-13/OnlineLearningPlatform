@@ -9,7 +9,7 @@ class EnrollmentsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @enrollments.to_csv, filename: "enrollments-#{DateTime.now.strftime("%D%M%Y%H%M")}.csv" }
+      format.csv { send_data @enrollments.to_csv, filename: "enrollments-#{Date.today}.csv" }
     end
   end
    
